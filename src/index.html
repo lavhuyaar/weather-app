@@ -3,7 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Weather App</title>
   </head>
-  <body></body>
+  <body>
+    <div class="input-container">
+        <div>
+        <label for="location-input">Enter location</label>
+        <input type="text" id="location-input" required minlength="2">
+        <div class="validity-message"></div>
+        </div>
+        <button id="search-btn">Search</button>
+    </div>
+    <div class="main-container"></div>
+  </body>
 </html>
