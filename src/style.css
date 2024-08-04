@@ -3,6 +3,8 @@
   padding: 0;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 body {
   background-color: grey;
   width: 100%;
@@ -11,15 +13,42 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  font-family: 'Poppins';
 }
 
 .input-container {
+  width: 100%;
     display: flex;
     gap: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.input-container > div {
+  padding: 10px;
 }
 
 .validity-message {
     display: none;
     word-wrap: break-word;  
     width: 300px;
+}
+
+.weekly-data-grid {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 2fr));
+  gap: 10px;
+  padding: 10px;
+}
+
+.card {
+  height: 150px;
+  border: 5px solid black;
+  padding: 10px;
+  border-radius: 12px;
+}
+
+.main-container {
+  width: 80%;
 }
