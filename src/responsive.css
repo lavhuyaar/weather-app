@@ -1,0 +1,36 @@
+@media only screen and (max-width: 1680px) {
+  .current-temp {
+    font-size: 6rem;
+  }
+}
+
+@media only screen and (max-width: 1550px) {
+  .current-temp {
+    font-size: 4rem;
+  }
+  .current-icon {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .main-container {
+    width: 100%;
+  }
+  .current-day-details {
+    width: 75%;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .current-day-details {
+    grid-template-columns: 1fr;
+  }
+  .current-feels-like-temp,
+  .current-humidity,
+  .current-condition,
+  .current-min-max-temp {
+    justify-self: center;
+  }
+}

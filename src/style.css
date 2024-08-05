@@ -3,52 +3,191 @@
   padding: 0;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+/*Poppins font*/
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 body {
-  background-color: grey;
+  background-color: #3f3f3f;
   width: 100%;
-  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-family: 'Poppins';
+  font-family: "Poppins", Arial, Helvetica, sans-serif;
+  color: white;
 }
 
+/*Input container*/
 .input-container {
-  width: 100%;
-    display: flex;
-    gap: 20px;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 10px 10px 10px;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .input-container > div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/*Input*/
+input {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 12px;
+  font-size: 600;
+  color: black;
+}
+
+label {
+  font-size: 0.8rem;
+}
+
+/*Search button*/
+#search-btn {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 12px;
+  font-family: "Poppins";
+  font-weight: 600;
+  font-size: 0.8rem;
+  cursor: pointer;
+  color: black;
+  background-color: white;
+}
+
+#search-btn:hover {
+  border: 2px white solid;
+  color: white;
+  background-color: transparent;
+}
+
+/*Validity text*/
+.validity-message {
+  display: none;
+  word-wrap: break-word;
+  width: 180px;
+  font-size: 0.7rem;
+  padding-left: 10px;
+}
+
+/*Main container*/
+.main-container {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/*Location title*/
+.location-title {
+  font-size: 2.7rem;
   padding: 10px;
 }
 
-.validity-message {
-    display: none;
-    word-wrap: break-word;  
-    width: 300px;
+.current-day-date {
+  padding-bottom: 5px;
 }
 
+/*Current day data box*/
+.current-day-details {
+  border-radius: 12px;
+  width: 77%;
+  padding: 15px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background-color: #282828;
+  filter: drop-shadow(4px 4px 2px #242424);
+  margin-bottom: 10px;
+}
+
+/*Icon of current day data box*/
+.current-icon {
+  height: 250px;
+  width: 250px;
+  justify-self: center;
+}
+
+.current-condition,
+.current-min-max-temp {
+  justify-self: end;
+}
+
+/*Current temperature*/
+.current-temp {
+  font-size: 7rem;
+  justify-self: center;
+  align-self: center;
+}
+
+/*Grid having cards*/
 .weekly-data-grid {
   display: grid;
-  width: 100%;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 2fr));
-  gap: 10px;
-  padding: 10px;
-}
-
-.card {
-  height: 150px;
-  border: 5px solid black;
-  padding: 10px;
-  border-radius: 12px;
-}
-
-.main-container {
   width: 80%;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 2fr));
+  gap: 20px;
+  padding: 10px 10px 20px 10px;
+}
+
+/*Card of weekly data*/
+.card {
+  padding: 15px;
+  border-radius: 12px;
+  display: grid;
+  justify-content: center;
+  background-color: #282828;
+  filter: drop-shadow(4px 4px 2px #242424);
+}
+
+/*Icon of card*/
+.icon {
+  height: 80px;
+  width: 80px;
+  justify-self: center;
+  padding: 10px;
+}
+
+/*Temperature in card*/
+.temp-data {
+  font-size: 2rem;
+  justify-self: center;
+}
+
+.day-date,
+.current-day-date {
+  font-size: 1.2rem;
+  justify-self: center;
+}
+
+/*Changes the color of icons to white*/
+img {
+  filter: brightness(0) invert(1);
+}
+
+/*Loader*/
+.loader {
+  display: none;
+  margin-top: 100px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 80px;
+  width: 80px;
+  border: 16px solid #3f3f3f;
+  border-top: 16px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
