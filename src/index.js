@@ -15,7 +15,7 @@ searchBtn.addEventListener("click", async () => {
     document.querySelector(".main-container").innerHTML = ``;
 
     //Changes display of loader to block
-    const loadingScreen = document.querySelector(".loading-screen");
+    const loadingScreen = document.querySelector(".loader");
     loadingScreen.style.display = "block";
     const locationInput = document.getElementById("location-input");
 
