@@ -5,7 +5,6 @@ import { fahrenheitToCelcius } from "./fahrenheitToCelcius";
 export function weatherInfoDisplay(apiData) {
   const mainContainer = document.querySelector(".main-container");
   mainContainer.innerHTML = ``;
-  console.log(apiData);
 
   //Location title
   const locationTitle = document.createElement("h2");
