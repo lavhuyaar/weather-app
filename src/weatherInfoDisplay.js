@@ -1,4 +1,5 @@
-import { format } from "date-fns";
+import { createIcon } from "./createIcon";
+import { fahrenheitToCelcius } from "./fahrenheitToCelcius";
 
 //Displays weather info
 export function weatherInfoDisplay(apiData) {
@@ -11,72 +12,112 @@ export function weatherInfoDisplay(apiData) {
   locationTitle.className = "location-title";
   locationTitle.textContent = apiData.resolvedAddress;
 
-  //Current date and day
+  //Current date, day and time
   let date = new Date(apiData.days[0].datetime) + "";
-  const todayDate = date.split(" ").splice(0, 1).join();
-  const currentDayDate = document.createElement('div');
-  currentDayDate.className = 'current-day-date';
-  currentDayDate.textContent=  todayDate + " " + new Date().toLocaleTimeString();
+  const currentDayDate = document.createElement("div");
+  currentDayDate.className = "current-day-date";
+  currentDayDate.textContent = `${date.split(" ").splice(0, 1).join()}, ${date
+    .split(" ")
+    .splice(1, 2)
+    .join(" ")} ${new Date().toLocaleTimeString()}`;
 
   //Current day conditions
   const currentDayConditions = document.createElement("div");
   currentDayConditions.className = "current-day-details";
 
-  //Temperature
+  //Current day icon
+  const currentIcon = createIcon(apiData.currentConditions.icon);
+  currentIcon.className = "current-icon";
+
+  //Current Temperature
   const currentTemperature = document.createElement("h3");
   currentTemperature.className = "current-temp";
-  currentTemperature.textContent = `${apiData.currentConditions.temp}°`;
+  currentTemperature.textContent = `${fahrenheitToCelcius(
+    apiData.currentConditions.temp
+  )}° C`;
 
+  //Current feels like temperature
   const currentFeelsLikeTemp = document.createElement("div");
-  currentFeelsLikeTemp.className = 'current-feels-like-temp';
-  currentFeelsLikeTemp.textContent = `Feels like ${apiData.currentConditions.feelslike}°`
+  currentFeelsLikeTemp.className = "current-feels-like-temp";
+  currentFeelsLikeTemp.textContent = `Feels like ${fahrenheitToCelcius(
+    apiData.currentConditions.feelslike
+  )}° C`;
 
+  //Current humidity
   const currentHumidity = document.createElement("div");
   currentHumidity.className = "current-humidity";
-  currentHumidity.textContent = `Humidity - ${apiData.currentConditions.humidity}%`;
+  currentHumidity.textContent = `${apiData.currentConditions.humidity}% humidity`;
 
-  const currentCondition = document.createElement("p");
+  //Current condition
+  const currentCondition = document.createElement("div");
   currentCondition.className = "current-condition";
   currentCondition.textContent = apiData.currentConditions.conditions;
 
+  //Current min-max temperature
+  const currentMinMaxTemp = document.createElement("p");
+  currentMinMaxTemp.className = "current-min-max-temp";
+  currentMinMaxTemp.textContent = `${fahrenheitToCelcius(
+    apiData.days[0].tempmin
+  )}° C / ${fahrenheitToCelcius(apiData.days[0].tempmax)}° C (min/max)`;
+
   currentDayConditions.append(
+    currentIcon,
     currentTemperature,
     currentFeelsLikeTemp,
     currentCondition,
-    currentHumidity
+    currentHumidity,
+    currentMinMaxTemp
   );
 
+  //Grid of cards
   const weeklyDataGrid = document.createElement("div");
   weeklyDataGrid.className = "weekly-data-grid";
 
-  mainContainer.append(locationTitle,currentDayDate, currentDayConditions, weeklyDataGrid);
+  mainContainer.append(
+    locationTitle,
+    currentDayDate,
+    currentDayConditions,
+    weeklyDataGrid
+  );
 
-  for (let i = 1; i <= 8; i++) {
+  //Loop that create cards
+  for (let i = 1; i <= 10; i++) {
     const card = document.createElement("div");
     card.className = "card";
 
+    //Humidity
     const humidityData = document.createElement("p");
     humidityData.className = "humanity-data";
-    humidityData.textContent = `Humidity - ${apiData.days[i].humidity}%`;
+    humidityData.textContent = `${apiData.days[i].humidity}% humidity`;
 
+    //Feels like temperature
     const tempFeelsLikeData = document.createElement("p");
     tempFeelsLikeData.className = "temp-feels-like-data";
-    tempFeelsLikeData.textContent = `Feels like ${apiData.days[i].feelslike}°`;
+    tempFeelsLikeData.textContent = `Feels like ${fahrenheitToCelcius(
+      apiData.days[i].feelslike
+    )}° C`;
 
+    //Temperature
     const tempData = document.createElement("h3");
     tempData.className = "temp-data";
-    tempData.textContent = `${apiData.days[i].temp}°`;
+    tempData.textContent = `${fahrenheitToCelcius(apiData.days[i].temp)}° C`;
 
+    //Day and date
     const dayDate = document.createElement("p");
     dayDate.className = "day-date";
-
     let date = new Date(apiData.days[i].datetime) + "";
-    dayDate.textContent = `${date.split(" ").splice(0, 1).join()} ${format(
-      date,
-      "dd-MM-yyyy"
-    )}`;
+    dayDate.textContent = `${date.split(" ").splice(0, 1).join()}, ${date
+      .split(" ")
+      .splice(1, 2)
+      .join(" ")}`;
 
-    card.append(tempData, tempFeelsLikeData, humidityData, dayDate);
+    card.append(
+      dayDate,
+      tempData,
+      createIcon(apiData.days[i].icon),
+      tempFeelsLikeData,
+      humidityData
+    );
 
     weeklyDataGrid.append(card);
   }
